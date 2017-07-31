@@ -42,9 +42,9 @@ class SectionHeaderView: UITableViewHeaderFooterView {
             lblTitle.attributedText = title
             lblTitle.sizeToFit()
             
-            let size = CGSize(width: lblTitle.bounds.size.width, height: 999.0)
-            height = (lblTitle.attributedText!.string as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName], context: nil)
-            //height = lblTitle.bounds.size.height + 8.0
+//            let size = CGSize(width: lblTitle.bounds.size.width, height: 999.0)
+//            height = (lblTitle.attributedText!.string as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName], context: nil)
+            height = lblTitle.bounds.size.height + 8.0
             
         }
     }
