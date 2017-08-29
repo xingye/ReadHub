@@ -42,23 +42,31 @@ class SectionHeaderView: UITableViewHeaderFooterView {
             lblTitle.attributedText = title
             lblTitle.sizeToFit()
             
-//            let size = CGSize(width: lblTitle.bounds.size.width, height: 999.0)
-//            height = (lblTitle.attributedText!.string as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName], context: nil)
-            height = lblTitle.bounds.size.height + 8.0
-            
+            height = lblTitle.bounds.size.height + 8
         }
     }
     
+    var section: Int = 0
+    
     weak var delegate: SectionHeaderViewDelegate?
+    
+    override var contentView: UIView {
+        return self.subviews[0]
+    }
     
     override func awakeFromNib() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
         self.addGestureRecognizer(tap)
+        
+        contentView.backgroundColor = .red
     }
+    
     
     @objc private func didTap(_ gesture: UITapGestureRecognizer) {
         viewModel?.nextStatus()
         delegate?.sectionHeaderViewDidTap(self)
     }
 }
+
+extension SectionHeaderView: Reuseable, NibCreateable {}
 

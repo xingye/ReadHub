@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,27 +15,37 @@
             <rect key="frame" x="0.0" y="0.0" width="534" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8G7-0i-ZwD">
-                    <rect key="frame" x="8" y="8" width="518" height="45"/>
-                    <gestureRecognizers/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVO-m5-tru">
+                    <rect key="frame" x="0.0" y="0.0" width="534" height="61"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8G7-0i-ZwD">
+                            <rect key="frame" x="8" y="8" width="42" height="21"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="8G7-0i-ZwD" firstAttribute="leading" secondItem="rVO-m5-tru" secondAttribute="leading" constant="8" id="ESh-fo-TXX"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8G7-0i-ZwD" secondAttribute="trailing" constant="8" id="JLS-fk-E8y"/>
+                        <constraint firstItem="8G7-0i-ZwD" firstAttribute="top" secondItem="rVO-m5-tru" secondAttribute="top" constant="8" id="ml7-MQ-7qw"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8G7-0i-ZwD" secondAttribute="bottom" constant="8" id="9Bs-q4-ojG"/>
-                <constraint firstItem="8G7-0i-ZwD" firstAttribute="leading" secondItem="jxb-vx-OA6" secondAttribute="leading" constant="8" id="CBL-y5-8eu"/>
-                <constraint firstAttribute="trailing" secondItem="8G7-0i-ZwD" secondAttribute="trailing" constant="8" id="T74-17-Rqc"/>
-                <constraint firstItem="8G7-0i-ZwD" firstAttribute="top" secondItem="jxb-vx-OA6" secondAttribute="top" constant="8" id="ZhZ-gH-n8e"/>
+                <constraint firstItem="rVO-m5-tru" firstAttribute="top" secondItem="jxb-vx-OA6" secondAttribute="top" id="OlQ-57-rxj"/>
+                <constraint firstAttribute="trailing" secondItem="rVO-m5-tru" secondAttribute="trailing" id="QwA-3q-xJx"/>
+                <constraint firstAttribute="bottom" secondItem="rVO-m5-tru" secondAttribute="bottom" id="jJN-tD-iGn"/>
+                <constraint firstItem="rVO-m5-tru" firstAttribute="leading" secondItem="jxb-vx-OA6" secondAttribute="leading" id="qA2-1h-coI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="lblTitle" destination="8G7-0i-ZwD" id="DOL-ZB-lyy"/>
             </connections>
-            <point key="canvasLocation" x="-223" y="-245"/>
+            <point key="canvasLocation" x="-340" y="-510"/>
         </view>
     </objects>
 </document>
