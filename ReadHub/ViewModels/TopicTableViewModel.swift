@@ -15,7 +15,7 @@ class TopicTableViewModel {
     private let templateCell: TopicSummaryCell
     
     init() {
-        self.templateCell =  Bundle.main.loadNibNamed("TopicSummaryCell",
+        self.templateCell = Bundle.main.loadNibNamed("TopicSummaryCell",
                                                  owner: nil,
                                                  options: nil)![0] as! TopicSummaryCell
     }
@@ -93,7 +93,6 @@ class TopicTableViewModel {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.reuseIdentifier) as! SectionHeaderView
         headerView.viewModel = sectionViewModels[section]
         
-        print("****** section: \(section) height: \(headerView.height)")
         return headerView.height + 5
     }
     
@@ -104,8 +103,6 @@ class TopicTableViewModel {
             templateCell.config(with: model)
             
             let height = templateCell.cellHeight()
-            print("indexPath: \(indexPath), height: \(height)")
-            
             return height
         }
  

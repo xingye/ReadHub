@@ -27,7 +27,7 @@ struct News: Mappable {
         url         <- map["url"]
         summary     <- map["summary"]
         title       <- map["title"]
-        publishDate <- (map["publishDate"], ISO8601DateTransform())
+        publishDate <- (map["publishDate"], transform)
     }
 }
 
@@ -49,6 +49,6 @@ struct TechNews: Mappable {
         url         <- map["url"]
         summary     <- map["summary"]
         title       <- map["title"]
-        publishDate <- (map["publishDate"], ISO8601DateTransform())
+        publishDate <- (map["publishDate"], transform)
     }
 }

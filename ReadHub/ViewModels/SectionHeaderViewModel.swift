@@ -16,15 +16,7 @@ struct SectionHeaderViewModel {
     
     init(topic: Topic) {
         title = topic.title
-        
-        let timeInterval = Date().timeIntervalSince(topic.publishDate ?? Date())
-        if Int(timeInterval / (24 * 60 * 60)) > 0 {
-            timeString = "\(Int(timeInterval / (24 * 60 * 60)))天前"
-        } else if Int(timeInterval / (60 * 60)) > 0 {
-            timeString = "\(Int(timeInterval / (60 * 60)))小时前"
-        } else if Int(timeInterval / 60) > 0 {
-            timeString = "\(Int(timeInterval / 60))分钟前"
-        }
+        timeString = (topic.publishDate ?? Date()).sinceNow()
         
         setSectionAttributeString()
     }

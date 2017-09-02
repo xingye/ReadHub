@@ -21,7 +21,6 @@
                     <connections>
                         <segue destination="sMQ-g5-vLr" kind="relationship" relationship="viewControllers" id="RIT-Vx-Amm"/>
                         <segue destination="6pS-Hf-LiS" kind="relationship" relationship="viewControllers" id="dxE-mE-wl5"/>
-                        <segue destination="nVf-8w-42k" kind="relationship" relationship="viewControllers" id="BNM-Tm-OjC"/>
                         <segue destination="r4W-Ib-ugY" kind="relationship" relationship="viewControllers" id="lfq-hJ-c7V"/>
                     </connections>
                 </tabBarController>
@@ -99,7 +98,7 @@
         <!--科技动态-->
         <scene sceneID="WKt-f5-Obt">
             <objects>
-                <tableViewController id="gMG-Dy-bFI" sceneMemberID="viewController">
+                <tableViewController id="gMG-Dy-bFI" customClass="NewsTableViewController" customModule="ReadHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ldL-kQ-KkC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,6 +119,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="科技动态" id="nUC-Ck-i5D"/>
+                    <connections>
+                        <segue destination="TiT-zT-tu1" kind="show" identifier="news" id="gFG-on-s6O"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oB6-zB-1Lv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -174,7 +176,7 @@
         <!--开发者资讯-->
         <scene sceneID="vSq-JY-U3L">
             <objects>
-                <tableViewController id="fE1-sD-fUF" customClass="TechNewsTableViewController" customModule="ReadHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fE1-sD-fUF" customClass="NewsTableViewController" customModule="ReadHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Yqh-rw-0Z9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,6 +197,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="开发者资讯" id="OGB-qt-IvD"/>
+                    <connections>
+                        <segue destination="TiT-zT-tu1" kind="show" identifier="news" id="ITI-5h-2t8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBl-BB-Ntt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -217,22 +222,8 @@
             </objects>
             <point key="canvasLocation" x="454" y="-878"/>
         </scene>
-        <!--设置-->
-        <scene sceneID="kMK-vD-iRO">
-            <objects>
-                <navigationController id="nVf-8w-42k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" id="FsP-hp-4ZY"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WxY-DH-z4b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Mbm-cB-Zxb" kind="relationship" relationship="rootViewController" id="VGI-wL-9uk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yRm-Ly-e5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="454" y="-113"/>
-        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ITI-5h-2t8"/>
+    </inferredMetricsTieBreakers>
 </document>

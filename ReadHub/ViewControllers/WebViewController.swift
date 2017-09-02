@@ -11,15 +11,10 @@ import WebKit
 
 class WebViewController: UIViewController {
     
-    var url: URLConvertable? {
+    var url: URL! {
         didSet {
-            guard let aUrl = url, let path = try? aUrl.asURL() else {
-                return
-            }
-            
             print(view)
-            
-            let request = URLRequest(url: path)
+            let request = URLRequest(url: url)
             webView.load(request)
         }
     }
