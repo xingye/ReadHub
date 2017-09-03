@@ -57,7 +57,8 @@ class DataLoader<T: Mappable> {
             if let cursor = lastCursor {
                 url += "&lastCursor=\(cursor - 10 * 60 * 1000)"
             } else {
-                url += "lastCursor=\(Int(Date().timeIntervalSince1970 * 1000))"
+                lastCursor = Int(Date().timeIntervalSince1970 * 1000)
+                url += "lastCursor=\(String(describing: lastCursor))"
             }
             
         }

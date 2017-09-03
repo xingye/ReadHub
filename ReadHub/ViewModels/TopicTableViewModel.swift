@@ -24,19 +24,53 @@ class TopicTableViewModel {
         result.filter { $0.title != nil && !$0.title!.isEmpty }
     }
     
+    private func loadOrRefresh(with result: Result<[Topic]>, completion: @escaping (Error?) -> Void) {
+        switch result {
+        case .failure(let error):
+            print("load topic error: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                completion(error)
+            }
+            
+        case .success(let data):
+            self.topics = data
+            self.sectionViewModels = self.topics.map(SectionHeaderViewModel.init)
+            
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+        }
+    }
+    
     func load(completion: @escaping (Error?) -> Void) {
-        loader.load { (result) in
+        loader.load { [unowned self] (result) in
+            self.loadOrRefresh(with: result, completion: completion)
+        }
+    }
+    
+    func refresh(completion: @escaping (Error?) -> Void) {
+        loader.refresh { [unowned self] (result) in
+            self.loadOrRefresh(with: result, completion: completion)
+        }
+    }
+    
+    func loadMore(completion: @escaping (Error?, IndexSet) -> Void) {
+        loader.nextPage { (result) in
             switch result {
             case .failure(let error):
-                print("load topic error: \(error.localizedDescription)")
-                completion(error)
+                DispatchQueue.main.async {
+                    completion(error, [])
+                }
                 
             case .success(let data):
-                self.topics = data
-                self.sectionViewModels = self.topics.map(SectionHeaderViewModel.init)
+                let currentSections = self.sectionViewModels.count
                 
+                self.topics.append(contentsOf: data)
+                self.sectionViewModels.append(contentsOf: data.map(SectionHeaderViewModel.init))
+                
+                let insertedSections = IndexSet(integersIn: currentSections..<(currentSections+data.count))
                 DispatchQueue.main.async {
-                    completion(nil)
+                    completion(nil, insertedSections)
                 }
             }
         }

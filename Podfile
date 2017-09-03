@@ -7,6 +7,7 @@ target 'ReadHub' do
 
   # Pods for ReadHub
   pod 'AlamofireObjectMapper', '~> 4.0'
+  pod 'ESPullToRefresh'
 
   target 'ReadHubTests' do
     inherit! :search_paths
