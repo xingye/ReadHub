@@ -8,10 +8,18 @@
 
 import UIKit
 
-class BasicNewsTableViewModel {
+class BasicNewsTableViewModel: Refresher {
     var news: [NewsProvider] = []
     
     func load(completeion: @escaping (Error?) -> Void) {
+        fatalError("Must be implemented by subclass")
+    }
+    
+    func loadMore(completion: @escaping (Error?, IndexSet) -> Void) {
+        fatalError("Must be implemented by subclass")
+    }
+    
+    func refresh(completion: @escaping (Error?) -> Void) {
         fatalError("Must be implemented by subclass")
     }
     
@@ -57,6 +65,14 @@ class NewsTableViewModel: BasicNewsTableViewModel {
             }
         }
     }
+    
+    override func loadMore(completion: @escaping (Error?, IndexSet) -> Void) {
+        //fatalError("Must be implemented by subclass")
+    }
+    
+    override func refresh(completion: @escaping (Error?) -> Void) {
+        //fatalError("Must be implemented by subclass")
+    }
 }
 
 class TechNewsTableViewModel: BasicNewsTableViewModel {
@@ -78,6 +94,14 @@ class TechNewsTableViewModel: BasicNewsTableViewModel {
                 completeion(error)
             }
         }
+    }
+    
+    override func loadMore(completion: @escaping (Error?, IndexSet) -> Void) {
+        //fatalError("Must be implemented by subclass")
+    }
+    
+    override func refresh(completion: @escaping (Error?) -> Void) {
+        //fatalError("Must be implemented by subclass")
     }
 }
 

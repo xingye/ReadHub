@@ -9,9 +9,12 @@
 import UIKit
 import ESPullToRefresh
 
-class TopicTableViewController: UITableViewController {
+class TopicTableViewController: UITableViewController, Refreshable {
     
-    var tableViewModel = TopicTableViewModel()
+    var viewModel: Refresher = TopicTableViewModel()
+    var tableViewModel: TopicTableViewModel {
+        return viewModel as! TopicTableViewModel
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,40 +39,6 @@ class TopicTableViewController: UITableViewController {
         tableView.register(SectionHeaderView.self)
         tableView.register(TopicCell.self)
         tableView.register(TopicSummaryCell.self)
-    }
-    
-    private func configureRefresher() {
-        let header = ESRefreshHeaderAnimator(frame: .zero)
-        let footer = ESRefreshFooterAnimator(frame: .zero)
-        
-        tableView.es_addPullToRefresh(animator: header) { [unowned self] in
-            self.tableViewModel.refresh { error in
-                if let err = error {
-                    print(err)
-                    return
-                }
-                self.tableView.es_stopPullToRefresh()
-                self.tableView.reloadData()
-            }
-        }
-        
-        tableView.es_addInfiniteScrolling(animator: footer) { [unowned self] in
-            self.tableViewModel.loadMore { error, sections in
-                if let err = error {
-                    print(err)
-                    return
-                }
-                
-                if sections.count > 0 {
-                    self.tableView.es_stopLoadingMore()
-                    self.tableView.insertSections(sections, with: .automatic)
-                } else {
-                    self.tableView.es_noticeNoMoreData()
-                }
-            }
-        }
-        
-        tableView.expriedTimeInterval = 20.0
     }
 }
 

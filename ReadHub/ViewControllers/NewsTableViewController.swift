@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, Refreshable {
     
-    lazy var viewModel: BasicNewsTableViewModel = {
+    lazy var viewModel: Refresher = {
         let index = self.navigationController?.tabBarController?.selectedIndex
         if index == 2 {
             return TechNewsTableViewModel()
@@ -18,10 +19,14 @@ class NewsTableViewController: UITableViewController {
         return NewsTableViewModel()
     }()
     
+    var tableViewModel: BasicNewsTableViewModel {
+        return viewModel as! BasicNewsTableViewModel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.load { [weak self] (error) in
+        tableViewModel.load { [weak self] (error) in
             if let err = error {
                 print(err)
                 return
@@ -39,19 +44,19 @@ class NewsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections(in: tableView)
+        return tableViewModel.numberOfSections(in: tableView)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tableView(tableView, numberOfRowsInSection: section)
+        return tableViewModel.tableView(tableView, numberOfRowsInSection: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return viewModel.tableView(tableView, cellForRowAt: indexPath)
+        return tableViewModel.tableView(tableView, cellForRowAt: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = viewModel.url(at: indexPath)
+        let url = tableViewModel.url(at: indexPath)
         performSegue(withIdentifier: "news", sender: url)
     }
     

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class TopicTableViewModel {
+class TopicTableViewModel: Refresher {
     
-    private var topics: [Topic] = []
-    private var sectionViewModels: [SectionHeaderViewModel] = []
+    fileprivate var topics: [Topic] = []
+    fileprivate var sectionViewModels: [SectionHeaderViewModel] = []
     private let templateCell: TopicSummaryCell
     
     init() {
@@ -24,7 +24,7 @@ class TopicTableViewModel {
         result.filter { $0.title != nil && !$0.title!.isEmpty }
     }
     
-    private func loadOrRefresh(with result: Result<[Topic]>, completion: @escaping (Error?) -> Void) {
+    fileprivate func loadOrRefresh(with result: Result<[Topic]>, completion: @escaping (Error?) -> Void) {
         switch result {
         case .failure(let error):
             print("load topic error: \(error.localizedDescription)")
@@ -39,12 +39,6 @@ class TopicTableViewModel {
             DispatchQueue.main.async {
                 completion(nil)
             }
-        }
-    }
-    
-    func load(completion: @escaping (Error?) -> Void) {
-        loader.load { [unowned self] (result) in
-            self.loadOrRefresh(with: result, completion: completion)
         }
     }
     
@@ -73,6 +67,12 @@ class TopicTableViewModel {
                     completion(nil, insertedSections)
                 }
             }
+        }
+    }
+    
+    func load(completion: @escaping (Error?) -> Void) {
+        loader.load { [unowned self] (result) in
+            self.loadOrRefresh(with: result, completion: completion)
         }
     }
     
@@ -166,3 +166,36 @@ class TopicTableViewModel {
         return true
     }
 }
+
+/*
+extension TopicTableViewModel: Refresher {
+    
+    func refresh(completion: @escaping (Error?) -> Void) {
+        loader.refresh { [unowned self] (result) in
+            self.loadOrRefresh(with: result, completion: completion)
+        }
+    }
+    
+    func loadMore(completion: @escaping (Error?, IndexSet) -> Void) {
+        loader.nextPage { (result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    completion(error, [])
+                }
+                
+            case .success(let data):
+                let currentSections = self.sectionViewModels.count
+                
+                self.topics.append(contentsOf: data)
+                self.sectionViewModels.append(contentsOf: data.map(SectionHeaderViewModel.init))
+                
+                let insertedSections = IndexSet(integersIn: currentSections..<(currentSections+data.count))
+                DispatchQueue.main.async {
+                    completion(nil, insertedSections)
+                }
+            }
+        }
+    }
+}
+ */
